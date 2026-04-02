@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transformation Sensation — Energiheling & Åndelig Veiledning</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:    #FAF7F2;
+      --blush:    #EDD9CC;
+      --sage:     #B5C4B1;
+      --mist:     #D6E0DC;
+      --stone:    #8A8478;
+      --ink:      #3D3830;
+      --gold:     #C8A97E;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 3rem;
+      background: rgba(250,247,242,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,169,126,0.35);
+      box-shadow: 0 2px 16px rgba(61,56,48,0.07);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      color: var(--ink);
+      text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 8rem 5rem 6rem 6rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      animation: fadeUp 1s ease both;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3rem, 5vw, 5rem);
+      line-height: 1.08;
+      color: var(--ink);
+      animation: fadeUp 1s 0.15s ease both;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      margin-top: 1.8rem;
+      max-width: 380px;
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: var(--stone);
+      animation: fadeUp 1s 0.3s ease both;
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      animation: fadeUp 1s 0.45s ease both;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2.4rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    .btn:hover { background: var(--gold); color: var(--cream); }
+
+    .hero-right {
+      position: relative;
+      background: var(--mist);
+      overflow: hidden;
+    }
+
+    .hero-right::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 70% at 60% 40%, rgba(237,217,204,0.6) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 30% 70%, rgba(181,196,177,0.4) 0%, transparent 70%);
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.35;
+    }
+    .orb-1 {
+      width: 340px; height: 340px;
+      top: 10%; left: 10%;
+      background: radial-gradient(circle, var(--blush), transparent);
+      animation: drift 8s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 200px; height: 200px;
+      bottom: 20%; right: 15%;
+      background: radial-gradient(circle, var(--sage), transparent);
+      animation: drift 11s 2s ease-in-out infinite reverse;
+    }
+    .orb-3 {
+      width: 120px; height: 120px;
+      top: 55%; left: 40%;
+      background: radial-gradient(circle, var(--gold), transparent);
+      animation: drift 7s 1s ease-in-out infinite;
+    }
+
+    .hero-right-text {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center;
+      z-index: 2;
+      padding: 3rem;
+    }
+    .hero-right-text .big-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.5rem, 2.5vw, 2.4rem);
+      color: var(--ink);
+      line-height: 1.5;
+      opacity: 0;
+      animation: fadeUp 1.2s 0.6s ease forwards;
+    }
+    .hero-right-text .quote-line {
+      display: block;
+      width: 40px; height: 1px;
+      background: var(--gold);
+      margin: 1.5rem auto;
+      opacity: 0;
+      animation: fadeUp 1.2s 0.8s ease forwards;
+    }
+    .hero-right-text .quote-attr {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--stone);
+      opacity: 0;
+      animation: fadeUp 1.2s 1s ease forwards;
+    }
+
+    /* ── SERVICES ── */
+    .services {
+      padding: 8rem 6rem;
+      background: var(--cream);
+    }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 4rem;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .card {
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(200,169,126,0.2);
+      background: var(--cream);
+      position: relative;
+      transition: box-shadow 0.4s, transform 0.4s;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--blush));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(140,120,90,0.1); }
+    .card:hover::before { transform: scaleX(1); }
+
+    .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1.4rem;
+      display: block;
+    }
+    .card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.8rem;
+    }
+    .card p {
+      font-size: 0.88rem;
+      line-height: 1.85;
+      color: var(--stone);
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      padding: 8rem 6rem;
+      background: var(--mist);
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+      height: 420px;
+    }
+    .about-orb {
+      position: absolute;
+      border-radius: 50%;
+    }
+    .about-orb-1 {
+      width: 300px; height: 300px;
+      top: 0; left: 0;
+      background: radial-gradient(circle at 40% 40%, var(--blush), rgba(237,217,204,0.1));
+      animation: drift 9s ease-in-out infinite;
+    }
+    .about-orb-2 {
+      width: 180px; height: 180px;
+      bottom: 10px; right: 20px;
+      background: radial-gradient(circle at 50% 50%, var(--sage), rgba(181,196,177,0.1));
+      animation: drift 12s 3s ease-in-out infinite reverse;
+    }
+    .about-initials {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 8rem;
+      font-weight: 300;
+      color: rgba(200,169,126,0.25);
+      line-height: 1;
+      user-select: none;
+    }
+    .about-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.25;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .about-text p {
+      font-size: 0.92rem;
+      line-height: 2;
+      color: var(--stone);
+      margin-bottom: 1.2rem;
+    }
+    .about-text .btn { margin-top: 1.5rem; }
+
+    /* ── TESTIMONIAL ── */
+    .testimonial {
+      padding: 7rem 6rem;
+      background: var(--cream);
+      text-align: center;
+    }
+    .testimonial blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+      font-weight: 300;
+      color: var(--ink);
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .testimonial cite {
+      display: block;
+      margin-top: 2rem;
+      font-style: normal;
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .divider {
+      display: block;
+      width: 50px; height: 1px;
+      background: var(--gold);
+      margin: 2.5rem auto;
+    }
+
+    /* ── CONTACT ── */
+    .contact {
+      padding: 8rem 6rem;
+      background: var(--blush);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .contact h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 300;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    .contact > div:first-child p {
+      font-size: 0.9rem;
+      line-height: 2;
+      color: var(--stone);
+      margin-bottom: 2rem;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-info a {
+      font-size: 0.85rem;
+      color: var(--stone);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+    .contact-info a:hover { color: var(--gold); }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-field { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-field label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+    .form-field input,
+    .form-field textarea {
+      background: rgba(250,247,242,0.6);
+      border: 1px solid rgba(200,169,126,0.3);
+      padding: 0.85rem 1rem;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.88rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.3s;
+      resize: none;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus { border-color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 6rem;
+      background: var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer .f-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      color: var(--cream);
+      opacity: 0.6;
+    }
+    footer .f-copy {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--stone);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes drift {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(12px, -16px) scale(1.04); }
+      66%       { transform: translate(-8px, 10px) scale(0.97); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 8rem 2rem 4rem; }
+      .hero-right { height: 380px; }
+      .services, .testimonial { padding: 5rem 2rem; }
+      .cards { grid-template-columns: 1fr; }
+      .about { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
+      .about-visual { height: 280px; }
+      .contact { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
+      footer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">Transformation Sensation</span>
+    <ul class="nav-links">
+      <li><a href="#services">Tjenester</a></li>
+      <li><a href="#about">Om Anne</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-tag">Energiheler & Åndelig veileder</p>
+      <h1>Gjenoppdag ditt<br><em>indre lys</em><br>og din balanse</h1>
+      <p class="hero-sub">
+        Gjennom skånsom energiarbeid og åndelig veiledning hjelper Anne deg å gjenoppdage deg selv — gi slipp på det som ikke lenger tjener deg, og vekke din naturlige evne til å hele.
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn">Book en time</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="hero-right-text">
+        <p class="big-quote">&laquo;Healing handler ikke om å reparere det som er ødelagt — det er å huske det som aldri gikk tapt.&raquo;</p>
+        <span class="quote-line"></span>
+        <p class="quote-attr">Anne Skoglund</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <p class="section-label">Hva jeg tilbyr</p>
+    <h2 class="section-title">Veier til<br>helhet</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="card-icon">&#10022;</span>
+        <h3>Energihealing</h3>
+        <p>En dypt gjenoppbyggende økt der blokkert eller stillestående energi skånsomt frigjøres, slik at din naturlige flyt kan vende tilbake. Passer for stress, emosjonell utmattelse og fysiske spenninger.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">&#9678;</span>
+        <h3>Åndelig coaching</h3>
+        <p>Personlig veiledning som hjelper deg å navigere livets overganger, fordype selvinnsikten og leve i tråd med sjelens formål. Varm, ikke-dogmatisk og dypt personlig.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">&#10087;</span>
+        <h3>Fjernhealing</h3>
+        <p>Healing kjenner ingen grenser. Fjernøkter er like kraftfulle og tilbys til klienter over hele verden — fra ditt eget hjem og i ditt eget tempo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-visual">
+      <div class="about-orb about-orb-1"></div>
+      <div class="about-orb about-orb-2"></div>
+      <div class="about-initials">TS</div>
+    </div>
+    <div class="about-text">
+      <p class="section-label">Om Anne</p>
+      <h2>En guide på din reise tilbake til deg selv</h2>
+      <p>Anne Skoglund er sertifisert energiheler og åndelig coach med over ti års erfaring med klienter i Skandinavia og verden for øvrig. Hennes praksis er forankret i kjærlighet, nærvær og dyp respekt for hvert enkelt menneskes unike vei.</p>
+      <p>Med røtter i energimedisin, intuitiv healing og bevisst tilstedeværelse skaper Anne et trygt og nærende rom der transformasjon utfolder seg naturlig — skånsomt, og i akkurat det tempoet som er riktig for deg.</p>
+      <a href="#contact" class="btn">Ta kontakt</a>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="testimonial">
+    <span class="divider"></span>
+    <blockquote>
+      &laquo;Å jobbe med Anne var en av de mest dyptgripende opplevelsene i mitt liv. Jeg følte meg sett, ivaretatt og genuint forandret. Jeg bærer den lettelsen med meg hver eneste dag.&raquo;
+    </blockquote>
+    <cite>— Maria L., Oslo</cite>
+    <span class="divider"></span>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div>
+      <p class="section-label">Ta kontakt</p>
+      <h2>Start din healing-reise</h2>
+      <p>Enten du har spørsmål eller er klar for å booke din første økt — Anne hører gjerne fra deg. Alle henvendelser besvares med omsorg og oppmerksomhet.</p>
+      <div class="contact-info">
+        <a href="mailto:skoglundanne74@gmail.com">&#9993; skoglundanne74@gmail.com</a>
+        <a href="tel:+4741041408">&#9742; +47 410 41 408</a>
+        <a href="#">&#8982; Tromsø, Norge &middot; Online over hele verden</a>
+      </div>
+    </div>
+    <div>
+      <div class="contact-form">
+        <div class="form-field">
+          <label>Ditt navn</label>
+          <input type="text" placeholder="Anne Dahl" />
+        </div>
+        <div class="form-field">
+          <label>E-postadresse</label>
+          <input type="email" placeholder="hei@eksempel.no" />
+        </div>
+        <div class="form-field">
+          <label>Melding</label>
+          <textarea rows="5" placeholder="Jeg vil gjerne vite mer om..."></textarea>
+        </div>
+        <a href="#" class="btn" style="text-align:center;">Send melding</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="f-logo">Transformation Sensation</span>
+    <span class="f-copy">&copy; 2026 &middot; Energiheling &middot; Tromsø, Norge</span>
+  </footer>
+
+</body>
+</html>

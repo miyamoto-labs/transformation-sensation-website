@@ -552,7 +552,7 @@
       </div>
     </div>
     <div>
-      <form class="contact-form" id="contact-form" onsubmit="sendEmail(event)">
+      <form class="contact-form" id="contact-form" onsubmit="sendEmail(event)" action="javascript:void(0)">
         <div class="form-field">
           <label for="from_name">Ditt navn</label>
           <input type="text" name="from_name" id="from_name" placeholder="Anne Dahl" required />
@@ -572,7 +572,7 @@
   </section>
 
   <script>
-    emailjs.init('ZOoYcYmctUcMJXRlk');
+    emailjs.init('ZOoYcYmctUcMJXRIk');
 
     function sendEmail(e) {
       e.preventDefault();
@@ -583,7 +583,7 @@
       status.textContent = '';
       status.style.color = 'var(--stone)';
 
-      emailjs.sendForm('service_pll9ndo', 'template_1nzp2w7', '#contact-form')
+      emailjs.sendForm('service_pll9ndo', 'template_1nzp2w7', document.getElementById('contact-form'))
         .then(function() {
           status.textContent = 'Meldingen er sendt! Vi svarer deg så snart vi kan.';
           status.style.color = 'var(--gold)';

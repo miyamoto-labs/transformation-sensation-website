@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Transformation Sensation — Energiheling & Åndelig Veiledning</title>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -551,23 +552,52 @@
       </div>
     </div>
     <div>
-      <div class="contact-form">
+      <form class="contact-form" id="contact-form" onsubmit="sendEmail(event)">
         <div class="form-field">
-          <label>Ditt navn</label>
-          <input type="text" placeholder="Anne Dahl" />
+          <label for="from_name">Ditt navn</label>
+          <input type="text" name="from_name" id="from_name" placeholder="Anne Dahl" required />
         </div>
         <div class="form-field">
-          <label>E-postadresse</label>
-          <input type="email" placeholder="hei@eksempel.no" />
+          <label for="from_email">E-postadresse</label>
+          <input type="email" name="from_email" id="from_email" placeholder="hei@eksempel.no" required />
         </div>
         <div class="form-field">
-          <label>Melding</label>
-          <textarea rows="5" placeholder="Jeg vil gjerne vite mer om..."></textarea>
+          <label for="message">Melding</label>
+          <textarea name="message" id="message" rows="5" placeholder="Jeg vil gjerne vite mer om..." required></textarea>
         </div>
-        <a href="#" class="btn" style="text-align:center;">Send melding</a>
-      </div>
+        <button type="submit" class="btn" id="submit-btn">Send melding</button>
+        <p id="form-status" style="margin-top:1rem;font-size:0.85rem;text-align:center;"></p>
+      </form>
     </div>
   </section>
+
+  <script>
+    emailjs.init('ZOoYcYmctUcMJXRlk');
+
+    function sendEmail(e) {
+      e.preventDefault();
+      var btn = document.getElementById('submit-btn');
+      var status = document.getElementById('form-status');
+      btn.disabled = true;
+      btn.textContent = 'Sender...';
+      status.textContent = '';
+      status.style.color = 'var(--stone)';
+
+      emailjs.sendForm('service_pll9ndo', 'template_1nzp2w7', '#contact-form')
+        .then(function() {
+          status.textContent = 'Meldingen er sendt! Vi svarer deg så snart vi kan.';
+          status.style.color = 'var(--gold)';
+          document.getElementById('contact-form').reset();
+          btn.disabled = false;
+          btn.textContent = 'Send melding';
+        }, function(error) {
+          status.textContent = 'Noe gikk galt. Prøv igjen eller send e-post direkte.';
+          status.style.color = '#c0392b';
+          btn.disabled = false;
+          btn.textContent = 'Send melding';
+        });
+    }
+  </script>
 
   <!-- FOOTER -->
   <footer>

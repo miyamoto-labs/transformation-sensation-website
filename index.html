@@ -47,6 +47,16 @@
       letter-spacing: 0.14em;
       color: var(--ink);
       text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .feather-logo {
+      height: 34px;
+      width: auto;
+      mix-blend-mode: multiply;
+      opacity: 0.75;
+      filter: sepia(0.3) saturate(0.6);
     }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
@@ -272,35 +282,18 @@
       align-items: center;
     }
     .about-visual {
-      position: relative;
-      height: 420px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .about-orb {
-      position: absolute;
-      border-radius: 50%;
-    }
-    .about-orb-1 {
-      width: 300px; height: 300px;
-      top: 0; left: 0;
-      background: radial-gradient(circle at 40% 40%, var(--blush), rgba(237,217,204,0.1));
-      animation: drift 9s ease-in-out infinite;
-    }
-    .about-orb-2 {
-      width: 180px; height: 180px;
-      bottom: 10px; right: 20px;
-      background: radial-gradient(circle at 50% 50%, var(--sage), rgba(181,196,177,0.1));
-      animation: drift 12s 3s ease-in-out infinite reverse;
-    }
-    .about-initials {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 8rem;
-      font-weight: 300;
-      color: rgba(200,169,126,0.25);
-      line-height: 1;
-      user-select: none;
+    .about-feather-img {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      mix-blend-mode: multiply;
+      opacity: 0.85;
+      filter: sepia(0.15) saturate(0.7);
+      transform: rotate(-5deg);
     }
     .about-text h2 {
       font-family: 'Cormorant Garamond', serif;
@@ -458,7 +451,7 @@
 
   <!-- NAV -->
   <nav>
-    <span class="nav-logo">Transformation Sensation</span>
+    <span class="nav-logo"><img src="feather-small.png" alt="" class="feather-logo"> Transformation Sensation</span>
     <ul class="nav-links">
       <li><a href="#services">Tjenester</a></li>
       <li><a href="#about">Om Anne</a></li>
@@ -516,9 +509,7 @@
   <!-- ABOUT -->
   <section class="about" id="about">
     <div class="about-visual">
-      <div class="about-orb about-orb-1"></div>
-      <div class="about-orb about-orb-2"></div>
-      <div class="about-initials">TS</div>
+      <img src="feather-large.png" alt="Fjær" class="about-feather-img">
     </div>
     <div class="about-text">
       <p class="section-label">Om Anne</p>
